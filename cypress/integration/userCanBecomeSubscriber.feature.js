@@ -71,4 +71,8 @@ describe("user can become subscriber", () => {
     cy.get("#back-to-root-path").click();
     cy.url().should("eq", "http://localhost:3001/");
   });
+
+  it (" ",() => {
+
+  })
 });
