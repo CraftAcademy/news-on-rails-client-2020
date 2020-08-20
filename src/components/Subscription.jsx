@@ -44,7 +44,7 @@ class Subscription extends Component {
     this.state.message &&
       (message = (
         <>
-          <p id="payment-message">{this.state.message}</p>
+          <p id="response-message">{this.state.message}</p>
           <Link id="back-to-root-path" to={{ pathname: "/" }}>
             Go back to reading news
           </Link>

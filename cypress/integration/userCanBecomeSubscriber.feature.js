@@ -27,52 +27,101 @@ describe("user can become subscriber", () => {
       cy.get("#login-submit").click();
     });
 
-    cy.route({
-      method: "POST",
-      url: "http://localhost:3000/api/v1/subscriptions",
-      response: {
-        paid: true,
-        message: "Successful payment, you are now a subscriber"
-      }
-    })
+
   });
 
-  it("successfully by clicking on subscribe button", () => {
-    cy.get("#become-subscriber").click();
-    cy.get('form[id="payment-form"]')
-      .should("exist")
-      .within(() => {
-        cy.wait(1000);
-        cy.get('iframe[name^="__privateStripeFrame5"]').then(($iframe) => {
-          const $body = $iframe.contents().find("body");
-          cy.wrap($body)
-            .find('input[name="cardnumber"]')
-            .type("4242424242424242", { delay: 50 });
-        });
-        cy.get('iframe[name^="__privateStripeFrame6"]').then(($iframe) => {
-          const $body = $iframe.contents().find("body");
-          cy.wrap($body)
-            .find('input[name="exp-date"]')
-            .type("1222", { delay: 10 });
-        });
 
-        cy.get('iframe[name^="__privateStripeFrame7"]').then(($iframe) => {
-          const $body = $iframe.contents().find("body");
-          cy.wrap($body).find('input[name="cvc"]').type("999", { delay: 10 });
-        });
+  context("successfully", () => {
+    before(() => {
+      cy.server();
+      cy.route({
+        method: "POST",
+        url: "http://localhost:3000/api/v1/subscriptions",
+        response: {
+          paid: true,
+          message: "Successful payment, you are now a subscriber",
+        },
       });
+    })
 
-    cy.get("#submit-payment").click();
+    it("by clicking on subscribe button", () => {
+      cy.get("#become-subscriber").click();
+      cy.get('form[id="payment-form"]')
+        .should("exist")
+        .within(() => {
+          cy.wait(1000);
+          cy.get('iframe[name^="__privateStripeFrame5"]').then(($iframe) => {
+            const $body = $iframe.contents().find("body");
+            cy.wrap($body)
+              .find('input[name="cardnumber"]')
+              .type("4242424242424242", { delay: 50 });
+          });
+          cy.get('iframe[name^="__privateStripeFrame6"]').then(($iframe) => {
+            const $body = $iframe.contents().find("body");
+            cy.wrap($body)
+              .find('input[name="exp-date"]')
+              .type("1222", { delay: 10 });
+          });
 
-    cy.get("#payment-message").should(
-      "contain",
-      "Successful payment, you are now a subscriber"
-    );
-    cy.get("#back-to-root-path").click();
-    cy.url().should("eq", "http://localhost:3001/");
+          cy.get('iframe[name^="__privateStripeFrame7"]').then(($iframe) => {
+            const $body = $iframe.contents().find("body");
+            cy.wrap($body).find('input[name="cvc"]').type("999", { delay: 10 });
+          });
+        });
+
+      cy.get("#submit-payment").click();
+
+      cy.get("#response-message").should(
+        "contain",
+        "Successful payment, you are now a subscriber"
+      );
+      cy.get("#back-to-root-path").click();
+      cy.url().should("eq", "http://localhost:3001/");
+    });
   });
 
-  it (" ",() => {
+  context("unsuccessfully", () => {
+    before(()=>{
+      cy.server();
+      cy.route({
+        method: "POST",
+        url: "http://localhost:3000/api/v1/subscriptions",
+        response: {
+          paid: false,
+          message: "Something went wrong!",
+        },
+      });
+    })
+    it("with declined card ", () => {
+      cy.get("#become-subscriber").click();
+      cy.get('form[id="payment-form"]')
+        .should("exist")
+        .within(() => {
+          cy.wait(1000);
+          cy.get('iframe[name^="__privateStripeFrame5"]').then(($iframe) => {
+            const $body = $iframe.contents().find("body");
+            cy.wrap($body)
+              .find('input[name="cardnumber"]')
+              .type("4000000000000002", { delay: 50 });
+          });
+          cy.get('iframe[name^="__privateStripeFrame6"]').then(($iframe) => {
+            const $body = $iframe.contents().find("body");
+            cy.wrap($body)
+              .find('input[name="exp-date"]')
+              .type("1222", { delay: 10 });
+          });
 
-  })
+          cy.get('iframe[name^="__privateStripeFrame7"]').then(($iframe) => {
+            const $body = $iframe.contents().find("body");
+            cy.wrap($body).find('input[name="cvc"]').type("999", { delay: 10 });
+          });
+        });
+
+      cy.get("#submit-payment").click();
+      cy.get("#response-message").should(
+        "contain",
+        "Something went wrong!"
+      );
+    });
+  });
 });
