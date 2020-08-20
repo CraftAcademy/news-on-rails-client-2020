@@ -9,14 +9,12 @@ const Articles = (props) => {
   const [country, setCountry] = useState(null)
 
   const location = useSelector(state => state.location)
-
   const pathName = props.history.location.pathname
   const category = props.match.params.category
 
   useEffect(() => {
     getArticles()
   }, [])
-
 
   useEffect(() => {
     setSingleArticle(null);

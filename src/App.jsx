@@ -43,7 +43,7 @@ const App = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  return { renderLoginForm: state.renderLoginForm };
+  return { location: state.location };
 };
 
 export default connect(mapStateToProps)(App);

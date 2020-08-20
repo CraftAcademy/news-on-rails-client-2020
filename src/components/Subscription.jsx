@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import {
   injectStripe,
@@ -9,83 +9,70 @@ import {
 import { Link } from "react-router-dom";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
 
-class Subscription extends Component {
-  state = {
-    message: null,
-  };
+const Subscription = (props) => {
+  const [message, setMessage] = useState(null)
 
-  payWithStripe = async (event) => {
+  const payWithStripe = async (event) => {
     event.preventDefault();
-    let stripeResponse = await this.props.stripe.createToken();
+    let stripeResponse = await props.stripe.createToken();
 
     if (stripeResponse.token) {
-      stripeResponse.token && this.performPayment(stripeResponse.token.id);
+      stripeResponse.token && performPayment(stripeResponse.token.id);
     } else {
-      this.setState({ message: "Something went wrong!" });
+      setMessage("Something went wrong!")
     }
   };
 
-  performPayment = async (stripeToken) => {
+  const performPayment = async (stripeToken) => {
     let headers = await JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+
     try {
       let response = await axios.post(
         "/subscriptions",
-        {
-          stripeToken: stripeToken,
-        },
-        {
-          headers: headers,
-        }
+        { stripeToken: stripeToken },
+        { headers: headers }
       );
 
       if (response.data.paid === true) {
-        this.setState({ message: response.data.message });
+        setMessage(response.data.message)
       }
     } catch (error) {
-      this.setState({ message: error.response.data.message });
+      setMessage(error.response.data.message)
     }
   };
 
-  render() {
-    let message;
-
-    this.state.message &&
-      (message = (
+  return (
+    <>
+      {message && (
         <>
-          <p id="response-message">{this.state.message}</p>
+          <p id="response-message">{message}</p>
           <Link id="back-to-root-path" to={{ pathname: "/" }}>
             Go back to reading news
           </Link>
         </>
-      ));
+      )}
+      <Segment placeholder>
+        <Grid columns={1} relaxed="very" stackable>
+          <Grid.Column>
+            <Form onSubmit={payWithStripe} id="payment-form">
+              <label>Card number</label>
+              <CardNumberElement />
 
-    return (
-      <div>
-        <Segment placeholder>
-          <Grid columns={1} relaxed="very" stackable>
-            <Grid.Column>
-              <Form onSubmit={this.payWithStripe} id="payment-form">
-                <label>Card number</label>
-                <CardNumberElement />
+              <label>Expiry Date</label>
+              <CardExpiryElement />
 
-                <label>Expiry Date</label>
-                <CardExpiryElement />
+              <label>CVC</label>
+              <CardCVCElement />
 
-                <label>CVC</label>
-                <CardCVCElement />
-
-                <Button id="submit-payment" type="submit">
-                  Submit
-                </Button>
-              </Form>
-            </Grid.Column>
-          </Grid>
-        </Segment>
-
-        {message}
-      </div>
-    );
-  }
+              <Button id="submit-payment" type="submit">
+                Submit
+              </Button>
+            </Form>
+          </Grid.Column>
+        </Grid>
+      </Segment>
+    </>
+  )
 }
 
 export default injectStripe(Subscription);
