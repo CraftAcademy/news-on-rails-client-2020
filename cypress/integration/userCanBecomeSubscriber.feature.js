@@ -87,9 +87,9 @@ describe("user can become subscriber", () => {
         method: "POST",
         url: "http://localhost:3000/api/v1/subscriptions",
         response: {
-          paid: false,
           message: "Something went wrong!",
         },
+        status: 422
       });
     })
     it("with declined card ", () => {

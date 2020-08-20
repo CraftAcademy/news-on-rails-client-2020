@@ -18,23 +18,31 @@ class Subscription extends Component {
     event.preventDefault();
     let stripeResponse = await this.props.stripe.createToken();
 
-    stripeResponse.token && this.performPayment(stripeResponse.token.id);
+    if (stripeResponse.token) {
+      stripeResponse.token && this.performPayment(stripeResponse.token.id);
+    } else {
+      this.setState({ message: "Something went wrong!" });
+    }
   };
 
   performPayment = async (stripeToken) => {
     let headers = await JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-    let response = await axios.post(
-      "/subscriptions",
-      {
-        stripeToken: stripeToken,
-      },
-      {
-        headers: headers,
-      }
-    );
+    try {
+      let response = await axios.post(
+        "/subscriptions",
+        {
+          stripeToken: stripeToken,
+        },
+        {
+          headers: headers,
+        }
+      );
 
-    if (response.data.paid === true) {
-      this.setState({ message: response.data.message });
+      if (response.data.paid === true) {
+        this.setState({ message: response.data.message });
+      }
+    } catch (error) {
+      this.setState({ message: error.response.data.message });
     }
   };
 

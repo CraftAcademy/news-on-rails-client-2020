@@ -20,7 +20,7 @@ const LoginForm = (props) => {
         },
       });
     } catch (error) {
-      debugger
+      
       props.dispatch({
         type: "FAIL_AUTHENTICATE",
         payload: {
