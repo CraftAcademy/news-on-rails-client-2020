@@ -30,7 +30,7 @@ describe("user can become subscriber", () => {
 
   it("successfully by clicking on subscribe button", () => {
     cy.get("#become-subscriber").click();
-    cy.get("#payment-form")
+    cy.get('form[id="payment-form"]')
       .should("exist")
       .within(() => {
         cy.wait(1000);
