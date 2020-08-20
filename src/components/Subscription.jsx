@@ -7,11 +7,12 @@ import {
   CardCVCElement,
 } from "react-stripe-elements";
 import { Link } from "react-router-dom";
+import { Button, Form, Grid, Segment } from "semantic-ui-react";
 
 class Subscription extends Component {
   state = {
-    message: null
-  }
+    message: null,
+  };
 
   payWithStripe = async (event) => {
     event.preventDefault();
@@ -21,7 +22,7 @@ class Subscription extends Component {
   };
 
   performPayment = async (stripeToken) => {
-    let headers = await JSON.parse(localStorage.getItem("J-tockAuth-Storage"))
+    let headers = await JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
     let response = await axios.post(
       "/subscriptions",
       {
@@ -44,26 +45,34 @@ class Subscription extends Component {
       (message = (
         <>
           <p id="payment-message">{this.state.message}</p>
-          <Link id="back-to-root-path" to={{ pathname: "/" }}>Go back to reading news</Link>
+          <Link id="back-to-root-path" to={{ pathname: "/" }}>
+            Go back to reading news
+          </Link>
         </>
       ));
 
     return (
       <div>
-        <form onSubmit={this.payWithStripe} id="payment-form">
-          <label>Card number</label>
-          <CardNumberElement />
+        <Segment placeholder>
+          <Grid columns={1} relaxed="very" stackable>
+            <Grid.Column>
+              <Form onSubmit={this.payWithStripe} id="payment-form">
+                <label>Card number</label>
+                <CardNumberElement />
 
-          <label>Expiry Date</label>
-          <CardExpiryElement />
+                <label>Expiry Date</label>
+                <CardExpiryElement />
 
-          <label>CVC</label>
-          <CardCVCElement />
+                <label>CVC</label>
+                <CardCVCElement />
 
-          <button id="submit-payment" type="submit">
-            Submit
-        </button>
-        </form>
+                <Button id="submit-payment" type="submit">
+                  Submit
+                </Button>
+              </Form>
+            </Grid.Column>
+          </Grid>
+        </Segment>
 
         {message}
       </div>
