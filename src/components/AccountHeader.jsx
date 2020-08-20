@@ -1,10 +1,10 @@
 import React from "react";
-import { Menu, Dropdown } from "semantic-ui-react";
+import { Menu, Dropdown, Segment } from "semantic-ui-react";
 import i18n from "i18next";
 import LoginButton from "./LoginButton";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import {connect} from "react-redux"
+import { connect } from "react-redux";
 
 const AccountHeader = (props) => {
   const { t } = useTranslation();
@@ -14,25 +14,25 @@ const AccountHeader = (props) => {
   let becomeSubscriber;
 
   if (isCurrentUserSubscriber === false && isUserAuthenticated === true) {
-    
-     becomeSubscriber = (
+    becomeSubscriber = (
       <Menu.Item
-      name="subscription"
-      as={Link}
-      to={{ pathname: "/subscription" }}
-      id="become-subscriber"
-    >
-      Become Subscriber
-    </Menu.Item>
-      );
-    }  
-      
+        name="subscription"
+        as={Link}
+        to={{ pathname: "/subscription" }}
+        id="become-subscriber"
+      >
+        Become Subscriber
+      </Menu.Item>
+    );
+  }
+
   return (
-    <Menu secondary vertical floated="right">
-      <Menu.Item>
+    
+    <Menu secondary vertical >
+      <Menu.Item >
         <LoginButton id="header-login" />
       </Menu.Item>
-{becomeSubscriber}
+      {becomeSubscriber}
       <Dropdown id="change-language" item text={t("language-tab")}>
         <Dropdown.Menu>
           <Dropdown.Item
@@ -52,6 +52,7 @@ const AccountHeader = (props) => {
         </Dropdown.Menu>
       </Dropdown>
     </Menu>
+   
   );
 };
 

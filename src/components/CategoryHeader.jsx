@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Menu } from "semantic-ui-react";
+import { Menu, Segment } from "semantic-ui-react";
 
 const CategoryHeader = () => {
   const { t } = useTranslation();
@@ -11,7 +11,8 @@ const CategoryHeader = () => {
   };
 
   return (
-    <Menu className="category-header" widths={7}>
+    <Segment inverted>
+    <Menu inverted pointing secondary className="category-header" widths={7}>
       <Menu.Item
         name="home"
         active={activeItem === "home"}
@@ -58,15 +59,6 @@ const CategoryHeader = () => {
         {t("lifestyle-tab")}
       </Menu.Item>
       <Menu.Item
-        name="local"
-        active={activeItem === "local"}
-        onClick={handleTabClick}
-        as={Link}
-        to={{ pathname: "/articles/local" }}
-      >
-        {t("local-tab")}
-      </Menu.Item>
-      <Menu.Item
         name="sports"
         active={activeItem === "sports"}
         onClick={handleTabClick}
@@ -76,6 +68,7 @@ const CategoryHeader = () => {
         {t("sports-tab")}
       </Menu.Item>
     </Menu>
+    </Segment>
   );
 };
 export default CategoryHeader;
