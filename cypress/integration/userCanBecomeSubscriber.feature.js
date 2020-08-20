@@ -26,6 +26,15 @@ describe("user can become subscriber", () => {
       cy.get("#password").type("password");
       cy.get("#login-submit").click();
     });
+
+    cy.route({
+      method: "POST",
+      url: "http://localhost:3000/api/v1/subscriptions",
+      response: {
+        paid: true,
+        message: "Successful payment, you are now a subscriber"
+      }
+    })
   });
 
   it("successfully by clicking on subscribe button", () => {
@@ -60,6 +69,6 @@ describe("user can become subscriber", () => {
       "Successful payment, you are now a subscriber"
     );
     cy.get("#back-to-root-path").click();
-    cy.url().should("eq", "http://localhost:3001");
+    cy.url().should("eq", "http://localhost:3001/");
   });
 });
