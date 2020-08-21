@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import LoginButton from "./LoginButton";
 import { useTranslation } from "react-i18next";
-import i18n from "i18next";
-import { Menu, Dropdown } from "semantic-ui-react";
+import { Menu, Segment } from "semantic-ui-react";
 
 const CategoryHeader = () => {
   const { t } = useTranslation();
@@ -13,7 +11,8 @@ const CategoryHeader = () => {
   };
 
   return (
-    <Menu className="category-header" widths={9}>
+    <Segment inverted>
+    <Menu inverted pointing secondary className="category-header" widths={7}>
       <Menu.Item
         name="home"
         active={activeItem === "home"}
@@ -77,28 +76,8 @@ const CategoryHeader = () => {
       >
         {t("sports-tab")}
       </Menu.Item>
-      <Menu.Item>
-        <LoginButton id="header-login" />
-      </Menu.Item>
-      <Dropdown id="change-language" item text={t("language-tab")}>
-        <Dropdown.Menu>
-          <Dropdown.Item
-            onClick={() => {
-              i18n.changeLanguage("sv");
-            }}
-          >
-            Svenska
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {
-              i18n.changeLanguage("en");
-            }}
-          >
-            English
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
     </Menu>
+    </Segment>
   );
 };
 export default CategoryHeader;

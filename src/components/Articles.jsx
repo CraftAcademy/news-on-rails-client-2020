@@ -9,14 +9,12 @@ const Articles = (props) => {
   const [country, setCountry] = useState(null)
 
   const location = useSelector(state => state.location)
-
   const pathName = props.history.location.pathname
   const category = props.match.params.category
 
   useEffect(() => {
     getArticles()
   }, [])
-
 
   useEffect(() => {
     setSingleArticle(null);
@@ -38,7 +36,7 @@ const Articles = (props) => {
           longitude: currentPosition.longitude
         }
       });
-  
+
       setCountry(response.data.articles[0].location)
 
     } else {
@@ -88,8 +86,6 @@ const Articles = (props) => {
     )
   }
   return <div>{content}</div>;
-
 }
 
 export default Articles
-

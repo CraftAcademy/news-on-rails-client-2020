@@ -1,6 +1,7 @@
 import React from "react";
 import LoginButton from "./LoginButton";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 const ArticleContent = (props) => {
   let isCurrentUserSubscriber = props.userRole === "subscriber" ? true : false;
@@ -19,9 +20,12 @@ const ArticleContent = (props) => {
       );
     } else {
       articleContent = (
-        <p id="become-sub-message">
-          You need to become a subscriber to read this article
-        </p>
+        <>
+          <p id="become-sub-message">
+            You need to become a subscriber to read this article
+          </p>
+          <Link id="article-become-subscriber" to={{ pathname: "/subscription" }}>Become a subscriber</Link>
+        </>
       );
     }
   } else {
@@ -41,10 +45,10 @@ const ArticleContent = (props) => {
             </button>
           </>
         ) : (
-          <button id="button" onClick={props.getSingleArticle}>
-            Read more
-          </button>
-        )}
+            <button id="button" onClick={props.getSingleArticle}>
+              Read more
+            </button>
+          )}
       </div>
     </div>
   );
