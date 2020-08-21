@@ -36,7 +36,7 @@ const Articles = (props) => {
           longitude: currentPosition.longitude
         }
       });
-  
+
       setCountry(response.data.articles[0].location)
 
     } else {
@@ -86,8 +86,6 @@ const Articles = (props) => {
     )
   }
   return <div>{content}</div>;
-
 }
 
 export default Articles
-

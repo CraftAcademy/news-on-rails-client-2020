@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu, Dropdown, Segment } from "semantic-ui-react";
+import { Menu, Dropdown } from "semantic-ui-react";
 import i18n from "i18next";
 import LoginButton from "./LoginButton";
 import { useTranslation } from "react-i18next";
@@ -21,13 +21,12 @@ const AccountHeader = (props) => {
         to={{ pathname: "/subscription" }}
         id="become-subscriber"
       >
-        Become Subscriber
+        {t("become-subscriber-tab")}
       </Menu.Item>
     );
   }
 
   return (
-    
     <Menu secondary vertical >
       <Menu.Item >
         <LoginButton id="header-login" />
@@ -52,7 +51,7 @@ const AccountHeader = (props) => {
         </Dropdown.Menu>
       </Dropdown>
     </Menu>
-   
+
   );
 };
 
