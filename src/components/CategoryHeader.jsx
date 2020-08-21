@@ -59,6 +59,15 @@ const CategoryHeader = () => {
         {t("lifestyle-tab")}
       </Menu.Item>
       <Menu.Item
+        name="local"
+        active={activeItem === "local"}
+        onClick={handleTabClick}
+        as={Link}
+        to={{ pathname: "/articles/local" }}
+      >
+        {t("local-tab")}
+      </Menu.Item>
+      <Menu.Item
         name="sports"
         active={activeItem === "sports"}
         onClick={handleTabClick}

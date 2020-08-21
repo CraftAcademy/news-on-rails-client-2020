@@ -1,6 +1,6 @@
 const stubLocation = require("../support/stubLocation");
 
-describe("visitors can veiw articles ", () => {
+describe("visitors can view articles ", () => {
   context('based on sweden location', () => {
     before(() => {
       cy.server()
@@ -13,6 +13,7 @@ describe("visitors can veiw articles ", () => {
         latitude: 60, 
         longitude: 18,
       }));
+      cy.get('[href="/articles/local"]').click();
 
     })
    
