@@ -16,7 +16,7 @@ describe("user can Sign up", () => {
   })
 
   it("by registrating with valid credentials", () => {
-    cy.get("signup-button").click();
+    cy.get("#header-signup").click();
     cy.get("#signup-form").within(() => {
       cy.get("#email").type("registered@mail.com");
       cy.get("#password").type("password");

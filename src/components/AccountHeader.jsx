@@ -2,6 +2,7 @@ import React from "react";
 import { Menu, Dropdown } from "semantic-ui-react";
 import i18n from "i18next";
 import LoginButton from "./LoginButton";
+import SignUpButton from "./SignUpButton"
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -28,6 +29,9 @@ const AccountHeader = (props) => {
 
   return (
     <Menu secondary vertical >
+      <Menu.Item >
+        <SignUpButton id="header-signup" />
+      </Menu.Item>
       <Menu.Item >
         <LoginButton id="header-login" />
       </Menu.Item>

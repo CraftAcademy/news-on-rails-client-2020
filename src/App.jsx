@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Articles from "./components/Articles";
 import CategoryHeader from "./components/CategoryHeader";
 import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/SingUpForm"
 import { Header, Icon, Segment, Grid } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import AccountHeader from "./components/AccountHeader";
@@ -48,12 +49,16 @@ const App = (props) => {
           </Elements>
         </Switch>
         {props.renderLoginForm && <LoginForm />}
+        {props.renderSignUpForm && <SignUpForm />}
       </Suspense>
     </>
   );
 };
 const mapStateToProps = (state) => {
-  return { location: state.location, renderLoginForm: state.renderLoginForm };
+  return { 
+    location: state.location, 
+    renderLoginForm: state.renderLoginForm,
+    renderSignUpForm: state.renderSignUpForm };
 };
 
 export default connect(mapStateToProps)(App);

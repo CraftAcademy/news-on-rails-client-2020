@@ -10,6 +10,7 @@
   "email-field": "Email",
   "password-field": "Password",
   "login-button": "Login",
-  "become-subscriber-tab": "Become Subscriber"
+  "become-subscriber-tab": "Become Subscriber",
+  "signup-button": "Sign Up"
 
 }

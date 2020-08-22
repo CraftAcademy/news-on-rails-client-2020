@@ -37,7 +37,7 @@ const SingUpForm = (props) => {
       <Segment placeholder>
         <Grid columns={1} relaxed="very" stackable>
           <Grid.Column>
-            <Form onSubmit={authenticate} id="login-form">
+            <Form onSubmit={registration} id="signup-form">
               <Form.Input
                 id="email"
                 icon="user"
