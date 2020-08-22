@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Articles from "./components/Articles";
 import CategoryHeader from "./components/CategoryHeader";
 import LoginForm from "./components/LoginForm";
-import SignUpForm from "./components/SingUpForm"
+import SignUpForm from "./components/SingUpForm";
 import { Header, Icon, Segment, Grid } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import AccountHeader from "./components/AccountHeader";
@@ -38,6 +38,13 @@ const App = (props) => {
                 News on Rails
               </Header>
             </Grid.Column>
+            <Grid.Column>
+              {props.userEmail && (
+                <p id="welcome">
+                  Hey {props.userEmail}, have a great read!
+                </p>
+              )}
+            </Grid.Column>
           </Grid>
         </Segment>
         <CategoryHeader />
@@ -55,10 +62,11 @@ const App = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  return { 
-    location: state.location, 
+  return {
+    location: state.location,
     renderLoginForm: state.renderLoginForm,
-    renderSignUpForm: state.renderSignUpForm };
+    renderSignUpForm: state.renderSignUpForm,
+  };
 };
 
 export default connect(mapStateToProps)(App);

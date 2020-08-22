@@ -10,7 +10,7 @@ describe("user can Sign up", () => {
     cy.route({
       method: "POST",
       url: "http://localhost:3000/api/v1/auth",
-      reponse: "fixture:sign_up.json"
+      reponse: "fixture:sign_up.json" 
     })
     cy.visit("/")
   })

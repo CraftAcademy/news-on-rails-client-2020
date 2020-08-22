@@ -1,0 +1,10 @@
+{
+  "data": {
+    "id": 1,
+    "email": "registered@mail.com",
+    "provider": "email",
+    "uid": "registered@mail.com",
+    "allow_password_change": false,
+    "role": "registered"
+  }
+}

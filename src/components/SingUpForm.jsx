@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
 import auth from "../modules/auth";
@@ -10,11 +10,12 @@ const SingUpForm = (props) => {
     event.preventDefault();
 
     try {
-      let response = await auth.signUp(
-        event.target.email.value,
-        event.target.password.value,
-        event.target.passwordconfirmation.value
-      );
+      debugger;
+      let response = await auth.signUp({
+        email: event.target.email.value,
+        password: event.target.password.value,
+        passwordconfirmation: event.target.passwordconfirmation.value,
+      });
       props.dispatch({
         type: "AUTHENTICATE",
         payload: {
@@ -22,7 +23,6 @@ const SingUpForm = (props) => {
         },
       });
     } catch (error) {
-      
       props.dispatch({
         type: "FAIL_AUTHENTICATE",
         payload: {
@@ -77,4 +77,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(SingUpForm)
+export default connect(mapStateToProps)(SingUpForm);
