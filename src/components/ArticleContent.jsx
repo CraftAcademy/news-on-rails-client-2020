@@ -2,6 +2,7 @@ import React from "react";
 import LoginButton from "./LoginButton";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Grid, Divider, Segment, Button, Image } from "semantic-ui-react";
 
 const ArticleContent = (props) => {
   let isCurrentUserSubscriber = props.userRole === "subscriber" ? true : false;
@@ -24,7 +25,7 @@ const ArticleContent = (props) => {
           <p id="become-sub-message">
             You need to become a subscriber to read this article
           </p>
-          <Link id="article-become-subscriber" to={{ pathname: "/subscription" }}>Become a subscriber</Link>
+          <Link id="article-become-subscriber" to={{ pathname: "/subscription" }}>Become Subscriber</Link>
         </>
       );
     }
@@ -33,24 +34,31 @@ const ArticleContent = (props) => {
   }
 
   return (
-    <div className="article-list">
-      <div id={`article-${props.article.id}`} data-id={props.article.id}>
-        <h1 id="title">{props.article.title}</h1>
-        <h2 id="lead">{props.article.lead}</h2>
-        {props.singleArticle ? (
-          <>
-            {articleContent}
-            <button id="button" onClick={props.closeSingleArticle}>
-              Close article
-            </button>
-          </>
-        ) : (
-            <button id="button" onClick={props.getSingleArticle}>
-              Read more
-            </button>
-          )}
-      </div>
-    </div>
+    <Segment>
+      <Grid className="article-list">
+        <Grid.Column width={4}>
+          <Image src={props.article.image} />
+        </Grid.Column>
+        <Grid.Column width={9} id={`article-${props.article.id}`} data-id={props.article.id}>
+          <h1 id="title">{props.article.title}</h1>
+          <Divider horizental></Divider>
+          <h2 id="lead">{props.article.lead}</h2>
+
+          {props.singleArticle ? (
+            <>
+              {articleContent}
+              <Button id="button" onClick={props.closeSingleArticle}>
+                Close article
+            </Button>
+            </>
+          ) : (
+              <Button id="button" onClick={props.getSingleArticle}>
+                Read more
+              </Button>
+            )}
+        </Grid.Column>
+      </Grid>
+    </Segment>
   );
 };
 
