@@ -10,7 +10,7 @@ const SingUpForm = (props) => {
     event.preventDefault();
 
     try {
-      debugger;
+      debugger
       let response = await auth.signUp({
         email: event.target.email.value,
         password: event.target.password.value,
@@ -54,6 +54,7 @@ const SingUpForm = (props) => {
                 type="password"
               />
               <Form.Input
+                name='passwordconfirmation'
                 id="password-confirmation"
                 icon="lock"
                 iconPosition="left"

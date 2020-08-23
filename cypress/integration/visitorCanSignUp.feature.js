@@ -10,7 +10,7 @@ describe("user can Sign up", () => {
     cy.route({
       method: "POST",
       url: "http://localhost:3000/api/v1/auth",
-      reponse: "fixture:sign_up.json" 
+      response: "fixture:signup_response.json" 
     })
     cy.visit("/")
   })
@@ -23,6 +23,6 @@ describe("user can Sign up", () => {
       cy.get("#password-confirmation").type("password")
       cy.get("#signup-submit").click();
     });
-    cy.get("#signup-message").should("contain", "Your registration was successful. Welcome to News on Rails!")
+    cy.get("#welcome").should("contain", "Hey registered@mail.com, have a great read!")
   })
 })

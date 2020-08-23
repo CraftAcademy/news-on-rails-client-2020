@@ -66,6 +66,7 @@ const mapStateToProps = (state) => {
     location: state.location,
     renderLoginForm: state.renderLoginForm,
     renderSignUpForm: state.renderSignUpForm,
+    userEmail: state.currentUser.email
   };
 };
 
