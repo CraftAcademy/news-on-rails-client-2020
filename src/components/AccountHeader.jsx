@@ -2,7 +2,7 @@ import React from "react";
 import { Menu, Dropdown } from "semantic-ui-react";
 import i18n from "i18next";
 import LoginButton from "./LoginButton";
-import SignUpButton from "./SignUpButton"
+import SignUpButton from "./SignUpButton";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -14,6 +14,7 @@ const AccountHeader = (props) => {
 
   let becomeSubscriber;
   let registerUser;
+  let loginUser;
 
   if (isCurrentUserSubscriber === false && isUserAuthenticated === true) {
     becomeSubscriber = (
@@ -41,12 +42,21 @@ const AccountHeader = (props) => {
     );
   }
 
+  loginUser = (
+    <Menu.Item
+      name="login-page"
+      as={Link}
+      to={{ pathname: "/login" }}
+      id="login-page"
+    >
+      <LoginButton id="header-login" />
+    </Menu.Item>
+  );
+
   return (
-    <Menu secondary vertical >
+    <Menu secondary vertical>
       {registerUser}
-      <Menu.Item >
-        <LoginButton id="header-login" />
-      </Menu.Item>
+      {loginUser}
       {becomeSubscriber}
       <Dropdown id="change-language" item text={t("language-tab")}>
         <Dropdown.Menu>
@@ -67,7 +77,6 @@ const AccountHeader = (props) => {
         </Dropdown.Menu>
       </Dropdown>
     </Menu>
-
   );
 };
 

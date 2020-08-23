@@ -34,6 +34,7 @@ const SingUpForm = (props) => {
   return (
     <>
       <Segment placeholder>
+        <h3 id='signup-portal'>Sign Up Form</h3>
         <Grid columns={1} relaxed="very" stackable>
           <Grid.Column>
             <Form onSubmit={registration} id="signup-form">
