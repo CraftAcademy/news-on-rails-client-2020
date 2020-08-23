@@ -10,7 +10,6 @@ const SingUpForm = (props) => {
     event.preventDefault();
 
     try {
-      debugger
       let response = await auth.signUp({
         email: event.target.email.value,
         password: event.target.password.value,
@@ -19,7 +18,7 @@ const SingUpForm = (props) => {
       props.dispatch({
         type: "AUTHENTICATE",
         payload: {
-          currentUser: { email: response.data.email, role: response.data.role },
+          currentUser: { email: response.data.data.email, role: response.data.data.role },
         },
       });
     } catch (error) {
@@ -75,6 +74,7 @@ const SingUpForm = (props) => {
 const mapStateToProps = (state) => {
   return {
     errorMessage: state.errorMessage,
+    
   };
 };
 

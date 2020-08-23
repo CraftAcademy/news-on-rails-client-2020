@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Articles from "./components/Articles";
 import CategoryHeader from "./components/CategoryHeader";
@@ -13,6 +13,10 @@ import { Elements } from "react-stripe-elements";
 
 const App = (props) => {
   const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.currentUser)
+  console.log(currentUser)
+  
+  
   useEffect(() => {
     let coords;
     navigator.geolocation.getCurrentPosition((position) => {
@@ -66,7 +70,8 @@ const mapStateToProps = (state) => {
     location: state.location,
     renderLoginForm: state.renderLoginForm,
     renderSignUpForm: state.renderSignUpForm,
-    userEmail: state.currentUser.email
+    userEmail: state.currentUser.email,
+    authenticated: state.authenticated,
   };
 };
 
