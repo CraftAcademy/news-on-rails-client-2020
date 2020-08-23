@@ -15,7 +15,6 @@ const ArticleContent = (props) => {
     if (isUserAuthenticated === false) {
       articleContent = (
         <>
-       
           <p>You need to log in to read this article</p>
           <LoginButton id="login" />
         </>
@@ -35,32 +34,30 @@ const ArticleContent = (props) => {
   }
 
   return (
-   <Segment>
-    <Grid className="article-list">
-      <Grid.Column width={4}>
-      <Image src={props.article.image}/> 
-      </Grid.Column>
+    <Segment>
+      <Grid className="article-list">
+        <Grid.Column width={4}>
+          <Image src={props.article.image} />
+        </Grid.Column>
+        <Grid.Column width={9} id={`article-${props.article.id}`} data-id={props.article.id}>
+          <h1 id="title">{props.article.title}</h1>
+          <Divider horizental></Divider>
+          <h2 id="lead">{props.article.lead}</h2>
 
-      <Grid.Column width={9} id={`article-${props.article.id}`} data-id={props.article.id}>
-        <h1 id="title">{props.article.title}</h1>
-        <Divider horizental></Divider>
-        <h2 id="lead">{props.article.lead}</h2>
-       
-        {props.singleArticle ? (
-          <>
-            {articleContent}
-            <Button id="button" onClick={props.closeSingleArticle}>
-              Close article
+          {props.singleArticle ? (
+            <>
+              {articleContent}
+              <Button id="button" onClick={props.closeSingleArticle}>
+                Close article
             </Button>
-          </>
-        ) : (
-            <Button id="button" onClick={props.getSingleArticle}>
-              Read more
-            </Button>
-          )}
-      </Grid.Column>
-
-    </Grid>
+            </>
+          ) : (
+              <Button id="button" onClick={props.getSingleArticle}>
+                Read more
+              </Button>
+            )}
+        </Grid.Column>
+      </Grid>
     </Segment>
   );
 };
