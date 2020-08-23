@@ -11,6 +11,7 @@
   "password-field": "Password",
   "login-button": "Login",
   "become-subscriber-tab": "Become Subscriber",
-  "signup-button": "Sign Up"
-
+  "signup-button": "Sign Up",
+  "logout-button": "Logout",
+  "password-confirmation-field": "Password Confirmation"
 }

@@ -14,20 +14,20 @@ const LoginButton = (props) => {
   };
 
   const logout = () => {
-    auth.signOut()
+    auth.signOut();
     props.dispatch({
       type: "SIGNOUT",
-      payload: {authenticated: false},
+      payload: { authenticated: false },
     });
-    document.location.reload(true)
-}
+    document.location.reload(true);
+  };
 
   let login;
   if (props.authenticated) {
     login = (
       <>
         <Button id={props.id} onClick={logout}>
-          Logout
+          {t("logout-button")}
         </Button>
       </>
     );
@@ -41,11 +41,8 @@ const LoginButton = (props) => {
     );
   }
 
-  return <div>{ login }</div>;
+  return <div>{login}</div>;
 };
-
-// return <Button id={props.id} onClick={clickHandler}>{t("login-button")}</Button>
-// }
 
 const mapStateToProps = (state) => {
   return {
