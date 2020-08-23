@@ -13,10 +13,7 @@ import { Elements } from "react-stripe-elements";
 
 const App = (props) => {
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => state.currentUser)
-  console.log(currentUser)
-  
-  
+
   useEffect(() => {
     let coords;
     navigator.geolocation.getCurrentPosition((position) => {
@@ -44,9 +41,7 @@ const App = (props) => {
             </Grid.Column>
             <Grid.Column>
               {props.userEmail && (
-                <p id="welcome">
-                  Hey {props.userEmail}, have a great read!
-                </p>
+                <p id="welcome">Hey {props.userEmail}, have a great read!</p>
               )}
             </Grid.Column>
           </Grid>

@@ -36,6 +36,12 @@ const rootReducer = (state = initialState, action) => {
         location: action.payload,
       };
 
+    case "SIGNOUT":
+      return {
+        ...state,
+        authenticated: false,
+      };
+
     default:
       return state;
   }
