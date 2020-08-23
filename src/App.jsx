@@ -1,9 +1,10 @@
 import React, { Suspense, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Articles from "./components/Articles";
 import CategoryHeader from "./components/CategoryHeader";
 import LoginForm from "./components/LoginForm";
+import SignUpForm from "./components/SingUpForm";
 import { Header, Icon, Segment, Grid } from "semantic-ui-react";
 import { useDispatch } from "react-redux";
 import AccountHeader from "./components/AccountHeader";
@@ -12,6 +13,7 @@ import { Elements } from "react-stripe-elements";
 
 const App = (props) => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     let coords;
     navigator.geolocation.getCurrentPosition((position) => {
@@ -37,6 +39,11 @@ const App = (props) => {
                 News on Rails
               </Header>
             </Grid.Column>
+            <Grid.Column>
+              {props.userEmail && (
+                <p id="welcome">Hey {props.userEmail}, have a great read!</p>
+              )}
+            </Grid.Column>
           </Grid>
         </Segment>
         <CategoryHeader />
@@ -48,12 +55,19 @@ const App = (props) => {
           </Elements>
         </Switch>
         {props.renderLoginForm && <LoginForm />}
+        {props.renderSignUpForm && <SignUpForm />}
       </Suspense>
     </>
   );
 };
 const mapStateToProps = (state) => {
-  return { location: state.location, renderLoginForm: state.renderLoginForm };
+  return {
+    location: state.location,
+    renderLoginForm: state.renderLoginForm,
+    renderSignUpForm: state.renderSignUpForm,
+    userEmail: state.currentUser.email,
+    authenticated: state.authenticated,
+  };
 };
 
 export default connect(mapStateToProps)(App);

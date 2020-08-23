@@ -10,5 +10,8 @@
   "email-field": "Epost",
   "password-field": "Lösenord",
   "login-button": "Logga in",
-  "become-subscriber-tab": "Prenumerera"
+  "become-subscriber-tab": "Prenumerera",
+  "signup-button": "Registrera",
+  "logout-button": "Logga ut",
+  "password-confirmation-field": "Bekräfta Lösenord"
 }
