@@ -13,6 +13,7 @@ describe("Vistors can see list of Articles", () => {
       cy.get("#title").should("contain", "Scrum Lord");
       cy.get("#lead").should("contain", "Lord of all coharts");
       cy.get("button").should("contain", "Read more").click();
+      
     });
   });
 
@@ -22,6 +23,7 @@ describe("Vistors can see list of Articles", () => {
       cy.get("#lead").should("contain", "Happy campers is always a winner");
       cy.get("button").should("contain", "Read more").click();
     });
+    
   });
 
   it("Visitors can see list article three", () => {
