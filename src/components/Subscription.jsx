@@ -5,13 +5,12 @@ import {
   CardNumberElement,
   CardExpiryElement,
   CardCVCElement,
-}
-  from "react-stripe-elements";
+} from "react-stripe-elements";
 import { Link } from "react-router-dom";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
 
 const Subscription = (props) => {
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState(null);
 
   const payWithStripe = async (event) => {
     event.preventDefault();
@@ -20,7 +19,7 @@ const Subscription = (props) => {
     if (stripeResponse.token) {
       stripeResponse.token && performPayment(stripeResponse.token.id);
     } else {
-      setMessage("Something went wrong!")
+      setMessage("Something went wrong!");
     }
   };
 
@@ -34,11 +33,9 @@ const Subscription = (props) => {
         { headers: headers }
       );
 
-      if (response.data.paid === true) {
-        setMessage(response.data.message)
-      }
+      setMessage(response.data.message);
     } catch (error) {
-      setMessage(error.response.data.message)
+      setMessage(error.response.data.message);
     }
   };
 
@@ -73,7 +70,7 @@ const Subscription = (props) => {
         </Grid>
       </Segment>
     </>
-  )
-}
+  );
+};
 
 export default injectStripe(Subscription);
