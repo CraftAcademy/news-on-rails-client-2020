@@ -1,7 +1,14 @@
 import JtockAuth from "j-tockauth";
 
+let apiUrl;
+if (process.env.NODE_ENV === "production") {
+  apiUrl = "https://news-on-rails-api.herokuapp.com";
+} else {
+  apiUrl = "http://localhost:3000";
+}
+
 const auth = new JtockAuth({
-  host: "http://localhost:3000",
+  host: apiUrl,
   prefixUrl: "/api/v1",
 });
 
