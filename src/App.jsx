@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Articles from "./components/Articles";
 import CategoryHeader from "./components/CategoryHeader";
